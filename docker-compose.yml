@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  catalog-admin:
+    build: .
+    container_name: catalog-admin-backend
+    image: catalog-admin-backend:1.0.0
+    command: ./.docker/start.sh
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/node/app
+
+
+
