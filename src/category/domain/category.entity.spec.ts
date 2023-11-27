@@ -1,3 +1,4 @@
+import { Uuid } from '../../shared/domain/value-objects/uuid.vo';
 import { Category } from './category.entity';
 
 describe('Category Unit Tests', () => {
@@ -5,7 +6,7 @@ describe('Category Unit Tests', () => {
     it('should create a category with all values', () => {
       // Arrange
       const props = {
-        categoryId: '1',
+        categoryId: new Uuid(),
         name: 'Category 1',
         description: 'Category 1 description',
         isActive: false,
@@ -29,7 +30,7 @@ describe('Category Unit Tests', () => {
       // Act
       const category = new Category(props);
       // Assert
-      expect(category.categoryId).toBeUndefined();
+      expect(category.categoryId).toBeDefined();
       expect(category.name).toBe(props.name);
       expect(category.description).toBeNull();
       expect(category.isActive).toBe(true);
@@ -45,7 +46,7 @@ describe('Category Unit Tests', () => {
       // Act
       const category = new Category(props);
       // Assert
-      expect(category.categoryId).toBeUndefined();
+      expect(category.categoryId).toBeDefined();
       expect(category.name).toBe(props.name);
       expect(category.description).toBe(props.description);
       expect(category.isActive).toBe(true);
@@ -62,7 +63,7 @@ describe('Category Unit Tests', () => {
       // Act
       const category = Category.create(props);
       // Assert
-      expect(category.categoryId).toBeUndefined();
+      expect(category.categoryId).toBeDefined();
       expect(category.name).toBe(props.name);
       expect(category.description).toBeNull();
       expect(category.isActive).toBe(true);
@@ -78,7 +79,7 @@ describe('Category Unit Tests', () => {
       // Act
       const category = Category.create(props);
       // Assert
-      expect(category.categoryId).toBeUndefined();
+      expect(category.categoryId).toBeDefined();
       expect(category.name).toBe(props.name);
       expect(category.description).toBe(props.description);
       expect(category.isActive).toBe(true);
@@ -95,12 +96,33 @@ describe('Category Unit Tests', () => {
       // Act
       const category = Category.create(props);
       // Assert
-      expect(category.categoryId).toBeUndefined();
+      expect(category.categoryId).toBeDefined();
       expect(category.name).toBe(props.name);
       expect(category.description).toBe(props.description);
       expect(category.isActive).toBe(false);
       expect(category.createdAt).toBeDefined();
     });
+  });
+
+  describe('category id field', () => {
+    const arrange = [
+      { categoryId: null },
+      { categoryId: undefined },
+      { categoryId: new Uuid() },
+    ];
+
+    it.each(arrange)(
+      'should create a category with categoryId: %j',
+      ({ categoryId }) => {
+        // Act
+        const category = new Category({
+          name: 'Category 1',
+          categoryId: categoryId as any,
+        });
+        // Assert
+        expect(category.categoryId).toBeInstanceOf(Uuid);
+      },
+    );
   });
 
   describe('Change name', () => {
@@ -166,7 +188,7 @@ describe('Category Unit Tests', () => {
     it('should return a JSON', () => {
       // Arrange
       const props = {
-        categoryId: '1',
+        categoryId: new Uuid(),
         name: 'Category 1',
         description: 'Category 1 description',
         isActive: true,
@@ -176,7 +198,7 @@ describe('Category Unit Tests', () => {
       // Act
       const json = category.toJSON();
       // Assert
-      expect(json.categoryId).toBe(props.categoryId);
+      expect(json.categoryId).toBe(props.categoryId.id);
       expect(json.name).toBe(props.name);
       expect(json.description).toBe(props.description);
       expect(json.isActive).toBe(props.isActive);
