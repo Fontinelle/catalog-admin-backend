@@ -1,5 +1,5 @@
 #!/bin/bash
 
-npm install
+yarn install
 
 tail -f /dev/null
