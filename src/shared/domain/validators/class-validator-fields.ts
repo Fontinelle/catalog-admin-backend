@@ -20,6 +20,6 @@ export abstract class ClassValidatorFields<PropsValidated>
       this.validatedData = data;
     }
 
-    return errors;
+    return !errors.length;
   }
 }

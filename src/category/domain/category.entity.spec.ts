@@ -135,6 +135,20 @@ describe('Category Unit Tests', () => {
     );
   });
 
+  describe('Entity id field', () => {
+    it('should return a value object', () => {
+      // Arrange
+      const props = {
+        name: 'Category 1',
+      };
+      const category = new Category(props);
+      // Act
+      const entityId = category.entityId;
+      // Assert
+      expect(entityId).toBeInstanceOf(Uuid);
+    });
+  });
+
   describe('Change name', () => {
     it('should change name', () => {
       // Arrange
