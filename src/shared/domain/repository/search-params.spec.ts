@@ -48,7 +48,7 @@ describe('Search params unit tests', () => {
     ];
 
     arrange.forEach(({ perPage, expected }) => {
-      const searchParams = new SearchParams({ per_page: perPage as any });
+      const searchParams = new SearchParams({ perPage: perPage as any });
       expect(searchParams.perPage).toBe(expected);
     });
   });
@@ -114,7 +114,7 @@ describe('Search params unit tests', () => {
     arrange.forEach(({ sortDir, expected }) => {
       const searchParams = new SearchParams({
         sort: 'field',
-        sort_dir: sortDir as any,
+        sortDir: sortDir as any,
       });
       expect(searchParams.sortDir).toBe(expected);
     });

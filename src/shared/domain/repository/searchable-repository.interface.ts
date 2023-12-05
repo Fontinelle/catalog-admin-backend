@@ -7,7 +7,8 @@ import { SearchResult } from './search-result';
 export interface SearchableRepositoryInterface<
   E extends Entity,
   I extends ValueObject,
-  SearchInput = SearchParams,
+  Filter = string,
+  SearchInput = SearchParams<Filter>,
   SearchOutput = SearchResult,
 > extends RepositoryInterface<E, I> {
   sortableFields: string[];
