@@ -1,4 +1,3 @@
-import { Sequelize } from 'sequelize-typescript';
 import { CategorySequelizeRepository } from './category-sequelize.repository';
 import { CategoryModel } from './category.model';
 import { Category } from '../../../domain/category.entity';
@@ -8,20 +7,13 @@ import {
   CategorySearchResult,
 } from '../../../domain/category.repository';
 import { CategoryModelMapper } from './category-model.mapper';
+import { setupSequelize } from '../../../../shared/infra/testing/helpers';
 
 describe('CategorySequelizeRepository integration tests', () => {
-  let sequelize: Sequelize;
+  setupSequelize({ models: [CategoryModel] });
   let repository: CategorySequelizeRepository;
 
   beforeEach(async () => {
-    sequelize = new Sequelize({
-      dialect: 'sqlite',
-      storage: ':memory:',
-      models: [CategoryModel],
-      logging: false,
-    });
-
-    await sequelize.sync({ force: true });
     repository = new CategorySequelizeRepository(CategoryModel);
   });
 
