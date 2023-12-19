@@ -96,13 +96,7 @@ export class CategorySequelizeRepository
 
     return new CategorySearchResult({
       items: models.map(model => {
-        return new Category({
-          categoryId: new Uuid(model.categoryId),
-          name: model.name,
-          description: model.description,
-          isActive: model.isActive,
-          createdAt: model.createdAt,
-        });
+        return CategoryModelMapper.toEntity(model);
       }),
       currentPage: searchInput.page,
       perPage: searchInput.perPage,
