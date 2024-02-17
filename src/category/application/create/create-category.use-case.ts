@@ -1,6 +1,6 @@
-import { UseCaseInterface } from '../../shared/application/use-case.interface';
-import { Category } from '../domain/category.entity';
-import { CategoryRepositoryInterface } from '../domain/category.repository';
+import { UseCaseInterface } from '../../../shared/application/use-case.interface';
+import { Category } from '../../domain/category.entity';
+import { CategoryRepositoryInterface } from '../../domain/category.repository';
 
 export type CreateCategoryInput = {
   name: string;
